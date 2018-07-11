@@ -1,0 +1,433 @@
+@import url(https://fonts.googleapis.com/css?family=Space+Mono);@charset "UTF-8";
+
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+@font-face {
+  font-family: "DungGeunMo";
+  src: url(/fonts/dunggeunmo.eot?f1a4aa8f01d39b009aa181366a385822), url(/fonts/dunggeunmo.woff?654a517c0f95efbf07ea6feac69e58a1);
+}
+
+html {
+  font-size: 1.2rem;
+  font-family: "space mono", "DungGeunMo", sans-serif;
+}
+
+body {
+  padding: 2rem;
+  background-color: darkblue;
+  color: white;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+  margin: 1rem 0;
+  font-weight: bold;
+}
+
+h1 {
+  border-bottom: 3px solid yellow;
+  color: yellow;
+}
+
+h2 {
+  border-bottom: 1px solid lightgreen;
+  color: lightgreen;
+}
+
+h3 {
+  border-bottom: 1px dashed #fff;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 3px solid #fff;
+}
+
+a:before {
+  content: '\261E';
+  font-family: sans-serif;
+}
+
+a:after {
+  content: '\261C';
+  font-family: sans-serif;
+}
+
+.content-wrapper {
+  margin: 0 auto;
+  max-width: 60rem;
+}
+
+.header-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2rem;
+  line-height: 2;
+  background-color: lightgray;
+}
+
+.header-wrapper header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 0 auto;
+  max-width: 60rem;
+  color: dimgray;
+}
+
+.footer-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2rem;
+  line-height: 2;
+  background-color: lightgray;
+}
+
+.footer-wrapper footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 0 auto;
+  max-width: 60rem;
+}
+
+.footer-wrapper footer p {
+  text-align: right;
+  color: dimgray;
+}
+
+.post-list {
+  border-top: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+}
+
+.post-list .post {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  text-align: center;
+}
+
+.post-list .post .post-num {
+  width: 6%;
+}
+
+.post-list .post .post-title {
+  width: 54%;
+  text-align: left;
+  padding-left: 2rem;
+}
+
+.post-list .post .post-user {
+  width: 15%;
+}
+
+.post-list .post .post-date {
+  width: 15%;
+}
+
+.post-list .post .post-count {
+  width: 10%;
+}
+
+.post-list .post-header {
+  border-bottom: 3px solid #fff;
+}
+
+.post-list .post-header .post-title {
+  letter-spacing: 1rem;
+  text-align: center;
+}
+
