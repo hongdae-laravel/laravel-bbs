@@ -332,7 +332,7 @@ a:after {
   font-family: sans-serif;
 }
 
-.content-wrapper {
+.global-wrapper {
   margin: 0 auto;
   max-width: 60rem;
 }

@@ -21,7 +21,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app" class="content-wrapper">
+    <div id="app" class="global-wrapper">
         <div class="header-wrapper">
             <header>
                 <div class="header-title">

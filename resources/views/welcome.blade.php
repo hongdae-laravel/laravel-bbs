@@ -9,7 +9,10 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
-        <div>
+        <div id="app" class="global-wrapper">
+            <div>
+                <h1>Laravel BBS</h1>
+            </div>
             @if (Route::has('login'))
                 <div>
                     @auth
@@ -20,10 +23,6 @@
                     @endauth
                 </div>
             @endif
-
-            <div>
-                <h1>Laravel BBS</h1>
-            </div>
         </div>
     </body>
 </html>
