@@ -359,6 +359,25 @@ a:after {
   color: dimgray;
 }
 
+.header-wrapper header .user-wrapper .user ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.header-wrapper header .user-wrapper .user ul li {
+  padding: 0 0.6rem;
+}
+
+.header-wrapper header .user-wrapper .user ul li a {
+  border-bottom: 0;
+}
+
+.header-wrapper header .user-wrapper .user ul li a::before,
+.header-wrapper header .user-wrapper .user ul li a::after {
+  content: '';
+}
+
 .footer-wrapper {
   position: fixed;
   bottom: 0;

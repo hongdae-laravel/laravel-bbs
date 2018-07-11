@@ -21,50 +21,67 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <nav>
-            <div>
-                <a href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-
-                <div>
-                    <ul>
-                        <!-- Authentication Links -->
-                        @guest
-                            <li>
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            <li>
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
-                        @else
-                            <li>
-                                <a href="#">
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div>
+    <div id="app" class="content-wrapper">
+        <div class="header-wrapper">
+            <header>
+                <div class="header-title">
+                    <p>BBS Emulator Ver. 0.1.</p>
+                </div>
+                <div class="user-wrapper">
+                    <div class="user">
+                        <ul>
+                            <!-- Authentication Links -->
+                            @guest
+                                <li>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @else
+                                <li>
+                                    <a href="#">
+                                        {{ Auth::user()->name }}
+                                    </a>
+                                </li>
+                                <li>
                                     <a  href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                        onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
+                                </li>
+                            @endguest
+                        </ul>
+                    </div>
                 </div>
+            </header>
+        </div>
+        <nav>
+            <div>
+                <a href="{{ url('/') }}">
+                    {{ config('app.name', 'Laravel') }}
+                </a>
             </div>
         </nav>
 
         <main>
             @yield('content')
         </main>
+        <div class="footer-wrapper">
+            <footer>
+                <div class="board-button-wrapper">
+                    <p>읽기(Read) 쓰기(Write) 새로고침(Refrash)</p>
+                </div>
+                <div class="copyrights">
+                    <p>&copy;2018 paikwiki.</p>
+                </div>
+            </footer>
+        </div>
     </div>
 </body>
 </html>

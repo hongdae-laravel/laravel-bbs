@@ -81,7 +81,22 @@ a:after {
     .header-title {
 
     }
-    .user {
+    .user-wrapper {
+      .user {
+        ul {
+          display: flex;
+          li {
+            padding: 0 0.6rem;
+            a {
+              border-bottom: 0;
+            }
+            a::before,
+            a::after {
+              content: '';
+            }
+          }
+        }
+      }
     }
 
   }
