@@ -10,9 +10,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
@@ -33,22 +30,22 @@
                             <!-- Authentication Links -->
                             @guest
                                 <li>
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('buttons.login') }}</a>
                                 </li>
                                 <li>
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('buttons.register') }}</a>
                                 </li>
                             @else
                                 <li>
                                     <a href="#">
-                                        {{ Auth::user()->name }}
+                                        {{ Auth::user()->name }} 님으로 접속중
                                     </a>
                                 </li>
                                 <li>
                                     <a  href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('buttons.logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -74,14 +71,14 @@
         </main>
         <div class="footer-wrapper">
             <footer>
-                <div class="board-button-wrapper">
-                    <p>읽기(Read) 쓰기(Write) 새로고침(Refrash)</p>
-                </div>
                 <div class="copyrights">
                     <p>&copy;2018 paikwiki.</p>
                 </div>
             </footer>
         </div>
     </div>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 </body>
 </html>

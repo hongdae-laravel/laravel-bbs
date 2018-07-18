@@ -77,6 +77,17 @@ module.exports = __webpack_require__(2);
 
 console.log("app.js is running.");
 
+var prompt = document.querySelector('#prompt');
+console.log(prompt);
+var currentPromptValue = prompt.value;
+var inputWatcha = setInterval(function () {
+    if (currentPromptValue !== prompt.value) {
+        console.log('change!');
+        prompt.style.width = prompt.value.length * 0.8 + 0.8 + 'rem';
+        currentPromptValue = prompt.value;
+    }
+}, 200);
+
 /***/ }),
 /* 2 */
 /***/ (function(module, exports) {
