@@ -161,26 +161,16 @@ a:after {
   }
 }
 
-#prompt {
-  //font-family: "space mono", "DungGeunMo", sans-serif;
-  //box-sizing: border-box;
-  //width: 0rem;
-  //overflow-x: auto;
-  //-webkit-appearance: inherit;
-  //background-color: inherit;
-  //-webkit-rtl-ordering: logical;
-  //cursor: text;
-  //padding: 0;
-  //border: 0;
-  //border-right: 1rem solid #fff;
-  //color: #fff;
-  //letter-spacing: normal;
-  //word-spacing: normal;
-  //text-transform: none;
-  //text-indent: 0px;
-  //text-shadow: none;
-  //display: inline-block;
-  //text-align: start;
-  //margin: 0em;
-  //font: inherit;
+.prompter {
+  margin-left: -0.6em;
+  animation-duration: 1s;
+  animation-name: blink;
+  animation-iteration-count: infinite;
+}
+@keyframes blink {
+  0% { opacity: 1; }
+  30% { opacity: 0.8; }
+  50% { opacity: 0; }
+  80% { opacity: 0.8; }
+  100% { opacity: 1; }
 }

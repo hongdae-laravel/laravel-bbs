@@ -57,8 +57,9 @@
                 </li>
             </ul>
             <div class="board-button-wrapper">
-                <span>{{ __('buttons.read') }} {{ __('buttons.write') }} {{ __('buttons.refresh') }} :</span> <input
-                        type="text" id="prompt" />
+                <span>{{ __('buttons.read') }} {{ __('buttons.write') }} {{ __('buttons.refresh') }} :</span>
+                <span class="inputValue"></span>
+                <span class="prompter">|</span>
             </div>
         </div>
     </div>
