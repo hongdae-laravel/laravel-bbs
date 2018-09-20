@@ -75,60 +75,236 @@ module.exports = __webpack_require__(2);
 /* 1 */
 /***/ (function(module, exports) {
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var KeyEventHandler = function KeyEventHandler(props) {
-    _classCallCheck(this, KeyEventHandler);
+var PromptAction = function () {
+    function PromptAction() {
+        _classCallCheck(this, PromptAction);
 
-    this.props = props;
-};
+        this.promptAction = null;
+    }
 
-var props = {
-    buttons: {
-        r: '읽기',
-        w: '쓰기',
-        f: '새로고침'
-    },
-    inputValue: '',
-    canHasMultiCharacters: false,
-    get getCanHasMultiCharacters() {
-        return this.canHasMultiCharacters;
-    },
-    set setCanHasMultiCharacters(bool) {
-        this.canHasMultiCharacters = bool;
-    },
-    get getInputValue() {
-        return this.inputValue;
-    },
-    set setInputValue(e) {
-        var kCode = e.keyCode;
-        var key = e.key;
-        if (kCode === 13) {
-            // Enter
-            this.setCanHasMultiCharacters = true;
-            alert(this.getInputValue);
+    _createClass(PromptAction, [{
+        key: 'setPromptAction',
+        value: function setPromptAction(promptAction) {
+            this.promptAction = promptAction;
+            console.log(this.promptAction.getActionName() + ' is setting.');
         }
-        if (kCode === 8) {
-            // Backspace
-            this.inputValue = this.inputValue.slice(0, this.inputValue.length - 1);
+    }, {
+        key: 'getInputValue',
+        value: function getInputValue() {
+            return this.promptAction.getInputValue();
         }
-        if (kCode > 64 && kCode < 91) {
-            if (this.canHasMultiCharacters) {
-                this.inputValue += key;
+    }, {
+        key: 'isPossibleKeyInput',
+        value: function isPossibleKeyInput(e) {
+            return this.promptAction.isPossibleKeyInput(e);
+        }
+    }, {
+        key: 'exec',
+        value: function exec(e) {
+            return this.promptAction.exec(e);
+        }
+    }]);
+
+    return PromptAction;
+}();
+
+var KeyEvent = function () {
+    function KeyEvent() {
+        _classCallCheck(this, KeyEvent);
+
+        this.name = '';
+        this.inputValue = '';
+    }
+
+    _createClass(KeyEvent, [{
+        key: 'getActionName',
+        value: function getActionName() {
+            return this.name;
+        }
+    }, {
+        key: 'getInputValue',
+        value: function getInputValue() {
+            return this.inputValue;
+        }
+    }, {
+        key: 'isPossibleKeyInput',
+        value: function isPossibleKeyInput(e) {
+            console.log(this.name + ' has not possibleKey condition.');
+            return true;
+        }
+    }]);
+
+    return KeyEvent;
+}();
+
+var ListenSingleCharKeyEvent = function (_KeyEvent) {
+    _inherits(ListenSingleCharKeyEvent, _KeyEvent);
+
+    function ListenSingleCharKeyEvent() {
+        _classCallCheck(this, ListenSingleCharKeyEvent);
+
+        var _this = _possibleConstructorReturn(this, (ListenSingleCharKeyEvent.__proto__ || Object.getPrototypeOf(ListenSingleCharKeyEvent)).call(this));
+
+        _this.name = 'ListenSingleCharKeyEvent';
+        return _this;
+    }
+
+    _createClass(ListenSingleCharKeyEvent, [{
+        key: 'setInputValue',
+        value: function setInputValue(keyName) {
+            this.inputValue = keyName;
+        }
+    }, {
+        key: 'isPossibleKeyInput',
+        value: function isPossibleKeyInput(e) {
+            if (e.keyCode > 64 && e.keyCode < 91) {
+                return true;
             } else {
-                this.inputValue = key;
+                return false;
             }
         }
-    }
-};
+    }, {
+        key: 'exec',
+        value: function exec(e) {
+            this.setInputValue(e.key);
+            console.log(this.inputValue);
+        }
+    }]);
 
-var keyEventHandler = new KeyEventHandler(props);
+    return ListenSingleCharKeyEvent;
+}(KeyEvent);
+
+var ListenMultiKeyEvent = function (_KeyEvent2) {
+    _inherits(ListenMultiKeyEvent, _KeyEvent2);
+
+    function ListenMultiKeyEvent() {
+        _classCallCheck(this, ListenMultiKeyEvent);
+
+        var _this2 = _possibleConstructorReturn(this, (ListenMultiKeyEvent.__proto__ || Object.getPrototypeOf(ListenMultiKeyEvent)).call(this));
+
+        _this2.name = 'ListenMultiKeyEvent';
+        return _this2;
+    }
+
+    _createClass(ListenMultiKeyEvent, [{
+        key: 'setInputValue',
+        value: function setInputValue(keyName) {
+            this.inputValue += keyName;
+        }
+    }, {
+        key: 'backspaceInputValue',
+        value: function backspaceInputValue() {
+            this.inputValue = this.inputValue.slice(0, this.inputValue.length - 1);
+        }
+    }, {
+        key: 'exec',
+        value: function exec(e) {
+            if (e.key === 'Backspace') {
+                this.backspaceInputValue();
+            } else {
+                this.setInputValue(e.key);
+            }
+            console.log(this.inputValue);
+        }
+    }]);
+
+    return ListenMultiKeyEvent;
+}(KeyEvent);
+
+var EnterEvent = function (_KeyEvent3) {
+    _inherits(EnterEvent, _KeyEvent3);
+
+    function EnterEvent() {
+        _classCallCheck(this, EnterEvent);
+
+        var _this3 = _possibleConstructorReturn(this, (EnterEvent.__proto__ || Object.getPrototypeOf(EnterEvent)).call(this));
+
+        _this3.name = 'EnterAction';
+        return _this3;
+    }
+
+    _createClass(EnterEvent, [{
+        key: 'setInputValue',
+        value: function setInputValue(val) {
+            this.inputValue = val;
+        }
+    }, {
+        key: 'exec',
+        value: function exec() {
+            var tAction = this.getInputValue() + 'Action';
+            if (actions.hasOwnProperty(tAction)) {
+                return tAction;
+            } else {
+                return null;
+            }
+        }
+    }]);
+
+    return EnterEvent;
+}(KeyEvent);
+
+var RAction = function (_KeyEvent4) {
+    _inherits(RAction, _KeyEvent4);
+
+    function RAction() {
+        _classCallCheck(this, RAction);
+
+        var _this4 = _possibleConstructorReturn(this, (RAction.__proto__ || Object.getPrototypeOf(RAction)).call(this));
+
+        _this4.name = 'rAction';
+        return _this4;
+    }
+
+    _createClass(RAction, [{
+        key: 'exec',
+        value: function exec() {
+            console.log('R');
+        }
+    }]);
+
+    return RAction;
+}(KeyEvent);
+
+var pAction = new PromptAction();
+var rAction = new RAction();
+
+var enterEvent = new EnterEvent();
+var listenSingleKeyEvent = new ListenSingleCharKeyEvent();
+var listenMultiKeyEvent = new ListenMultiKeyEvent();
+
+var actions = { enterEvent: enterEvent, rAction: rAction, listenSingleKeyEvent: listenSingleKeyEvent, listenMultiKeyEvent: listenMultiKeyEvent };
+var currentAction = 'listenSingleKeyEvent';
+pAction.setPromptAction(actions[currentAction]);
+
 var keyEvent = document.addEventListener('keyup', function (e) {
     e.preventDefault();
     var inputValueBox = document.querySelector('.inputValue');
-
-    keyEventHandler.props.setInputValue = e;
-    inputValueBox.innerHTML = keyEventHandler.props.getInputValue;
+    if (e.code === "Enter") {
+        actions['enterEvent'].setInputValue(pAction.getInputValue());
+        pAction.setPromptAction(actions['enterEvent']);
+        var nextActionName = pAction.exec(e);
+        console.log('nextActionName', nextActionName);
+        if (nextActionName === null) {
+            pAction.setPromptAction(actions[currentAction]);
+            inputValueBox.innerHTML = '잘못된 입력입니다. 다시 시도하세요.';
+        } else {
+            pAction.setPromptAction(actions[nextActionName]);
+            currentAction = nextActionName;
+        }
+    } else {
+        if (pAction.isPossibleKeyInput(e)) {
+            pAction.exec(e);
+        }
+        inputValueBox.innerHTML = pAction.getInputValue();
+    }
 });
 
 /***/ }),
