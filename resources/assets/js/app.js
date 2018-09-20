@@ -104,14 +104,36 @@ class RAction extends KeyEvent {
     }
 }
 
+class WAction extends KeyEvent {
+    constructor() {
+        super();
+        this.name = 'wAction';
+    }
+    exec() {
+        console.log('W');
+    }
+}
+
+class FAction extends KeyEvent {
+    constructor() {
+        super();
+        this.name = 'fAction';
+    }
+    exec() {
+        console.log('F');
+    }
+}
+
 const pAction = new PromptAction();
 const rAction = new RAction();
+const wAction = new WAction();
+const fAction = new FAction();
 
 const enterEvent= new EnterEvent();
 const listenSingleKeyEvent = new ListenSingleCharKeyEvent();
 const listenMultiKeyEvent = new ListenMultiKeyEvent();
 
-const actions = { enterEvent, rAction, listenSingleKeyEvent, listenMultiKeyEvent };
+const actions = { enterEvent, rAction, wAction, fAction, listenSingleKeyEvent, listenMultiKeyEvent };
 let currentAction = 'listenSingleKeyEvent';
 pAction.setPromptAction(actions[currentAction]);
 

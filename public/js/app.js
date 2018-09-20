@@ -273,14 +273,60 @@ var RAction = function (_KeyEvent4) {
     return RAction;
 }(KeyEvent);
 
+var WAction = function (_KeyEvent5) {
+    _inherits(WAction, _KeyEvent5);
+
+    function WAction() {
+        _classCallCheck(this, WAction);
+
+        var _this5 = _possibleConstructorReturn(this, (WAction.__proto__ || Object.getPrototypeOf(WAction)).call(this));
+
+        _this5.name = 'wAction';
+        return _this5;
+    }
+
+    _createClass(WAction, [{
+        key: 'exec',
+        value: function exec() {
+            console.log('W');
+        }
+    }]);
+
+    return WAction;
+}(KeyEvent);
+
+var FAction = function (_KeyEvent6) {
+    _inherits(FAction, _KeyEvent6);
+
+    function FAction() {
+        _classCallCheck(this, FAction);
+
+        var _this6 = _possibleConstructorReturn(this, (FAction.__proto__ || Object.getPrototypeOf(FAction)).call(this));
+
+        _this6.name = 'fAction';
+        return _this6;
+    }
+
+    _createClass(FAction, [{
+        key: 'exec',
+        value: function exec() {
+            console.log('F');
+        }
+    }]);
+
+    return FAction;
+}(KeyEvent);
+
 var pAction = new PromptAction();
 var rAction = new RAction();
+var wAction = new WAction();
+var fAction = new FAction();
 
 var enterEvent = new EnterEvent();
 var listenSingleKeyEvent = new ListenSingleCharKeyEvent();
 var listenMultiKeyEvent = new ListenMultiKeyEvent();
 
-var actions = { enterEvent: enterEvent, rAction: rAction, listenSingleKeyEvent: listenSingleKeyEvent, listenMultiKeyEvent: listenMultiKeyEvent };
+var actions = { enterEvent: enterEvent, rAction: rAction, wAction: wAction, fAction: fAction, listenSingleKeyEvent: listenSingleKeyEvent, listenMultiKeyEvent: listenMultiKeyEvent };
 var currentAction = 'listenSingleKeyEvent';
 pAction.setPromptAction(actions[currentAction]);
 
