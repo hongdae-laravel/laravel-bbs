@@ -2,8 +2,8 @@
 
 @section('content')
     <div>
-        <h1>Post show</h1>
+        <h1>{{ $post->id }}. {{ $post->title }}</h1>
 
-        <p>id is {{ $id }}</p>
+        <div>{{ $post->content}}</div>
     </div>
 @endsection
