@@ -5,6 +5,7 @@ class PromptAction {
     setPromptAction(promptAction) {
         this.promptAction = promptAction;
         console.log(`${this.promptAction.getActionName()} is setting.`);
+        this.promptAction.afterSetExec();
     }
     getInputValue() {
         return this.promptAction.getInputValue();
@@ -31,6 +32,9 @@ class KeyEvent {
     isPossibleKeyInput(e) {
         console.log(`${this.name} has not possibleKey condition.`);
         return true;
+    }
+    afterSetExec() {
+        console.log('This is afterSetExec from KeyEvent');
     }
 }
 
@@ -92,6 +96,9 @@ class EnterEvent extends KeyEvent {
             return null;
         }
     }
+    afterSetExec() {
+        console.log('This is afterSetExec from EnterEvent');
+    }
 }
 
 class RAction extends KeyEvent {
@@ -111,6 +118,19 @@ class WAction extends KeyEvent {
     }
     exec() {
         console.log('W');
+    }
+    isPossibleKeyInput() {
+        console.log('test');
+    }
+    afterSetExec() {
+        console.log('afterSetExec from wAction');
+        const inputValueBox = document.querySelector('.inputValue');
+        inputValueBox.innerHTML = '';
+        const tempBrElem = document.createElement('br');
+        const tempSpanElem = document.createElement('span');
+        tempSpanElem.innerText = '» 글 제목:';
+        inputValueBox.append(tempBrElem);
+        inputValueBox.append(tempSpanElem);
     }
 }
 

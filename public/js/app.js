@@ -95,6 +95,7 @@ var PromptAction = function () {
         value: function setPromptAction(promptAction) {
             this.promptAction = promptAction;
             console.log(this.promptAction.getActionName() + ' is setting.');
+            this.promptAction.afterSetExec();
         }
     }, {
         key: 'getInputValue',
@@ -139,6 +140,11 @@ var KeyEvent = function () {
         value: function isPossibleKeyInput(e) {
             console.log(this.name + ' has not possibleKey condition.');
             return true;
+        }
+    }, {
+        key: 'afterSetExec',
+        value: function afterSetExec() {
+            console.log('This is afterSetExec from KeyEvent');
         }
     }]);
 
@@ -246,6 +252,11 @@ var EnterEvent = function (_KeyEvent3) {
                 return null;
             }
         }
+    }, {
+        key: 'afterSetExec',
+        value: function afterSetExec() {
+            console.log('This is afterSetExec from EnterEvent');
+        }
     }]);
 
     return EnterEvent;
@@ -289,6 +300,23 @@ var WAction = function (_KeyEvent5) {
         key: 'exec',
         value: function exec() {
             console.log('W');
+        }
+    }, {
+        key: 'isPossibleKeyInput',
+        value: function isPossibleKeyInput() {
+            console.log('test');
+        }
+    }, {
+        key: 'afterSetExec',
+        value: function afterSetExec() {
+            console.log('afterSetExec from wAction');
+            var inputValueBox = document.querySelector('.inputValue');
+            inputValueBox.innerHTML = '';
+            var tempBrElem = document.createElement('br');
+            var tempSpanElem = document.createElement('span');
+            tempSpanElem.innerText = '» 글 제목:';
+            inputValueBox.append(tempBrElem);
+            inputValueBox.append(tempSpanElem);
         }
     }]);
 
