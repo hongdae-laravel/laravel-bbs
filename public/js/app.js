@@ -73,49 +73,91 @@ module.exports = __webpack_require__(2);
 
 /***/ }),
 /* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__KeyEvents_ListenSingleCharKeyEvent__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__KeyEvents_ListenMultiKeyEvent__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__KeyActions_PromptAction__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__KeyEvents_EnterEvent__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__KeyActions_RAction__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__KeyActions_WAction__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__KeyActions_FAction__ = __webpack_require__(25);
+
+
+
+
+
+
+
+
+
+var promptAction = new __WEBPACK_IMPORTED_MODULE_2__KeyActions_PromptAction__["a" /* default */]();
+var rAction = new __WEBPACK_IMPORTED_MODULE_4__KeyActions_RAction__["a" /* default */]();
+var wAction = new __WEBPACK_IMPORTED_MODULE_5__KeyActions_WAction__["a" /* default */]();
+var fAction = new __WEBPACK_IMPORTED_MODULE_6__KeyActions_FAction__["a" /* default */]();
+
+var enterEvent = new __WEBPACK_IMPORTED_MODULE_3__KeyEvents_EnterEvent__["a" /* default */]();
+var listenSingleKeyEvent = new __WEBPACK_IMPORTED_MODULE_0__KeyEvents_ListenSingleCharKeyEvent__["a" /* default */]();
+var listenMultiKeyEvent = new __WEBPACK_IMPORTED_MODULE_1__KeyEvents_ListenMultiKeyEvent__["a" /* default */]();
+
+var actions = { enterEvent: enterEvent, rAction: rAction, wAction: wAction, fAction: fAction, listenSingleKeyEvent: listenSingleKeyEvent, listenMultiKeyEvent: listenMultiKeyEvent };
+var currentAction = 'listenSingleKeyEvent';
+promptAction.setPromptAction(actions[currentAction]);
+
+var keyEvent = document.addEventListener('keyup', function (e) {
+    e.preventDefault();
+    var inputValueBox = document.querySelector('.inputValue');
+    if (e.code === "Enter") {
+        actions['enterEvent'].setInputValue(promptAction.getInputValue());
+        promptAction.setPromptAction(actions['enterEvent']);
+        var nextActionName = promptAction.exec(e);
+        console.log('nextActionName', nextActionName);
+        if (nextActionName === null) {
+            promptAction.setPromptAction(actions[currentAction]);
+            inputValueBox.innerHTML = '잘못된 입력입니다. 다시 시도하세요.';
+        } else {
+            promptAction.setPromptAction(actions[nextActionName]);
+            currentAction = nextActionName;
+        }
+    } else {
+        if (promptAction.isPossibleKeyInput(e)) {
+            promptAction.exec(e);
+        }
+        inputValueBox.innerHTML = promptAction.getInputValue();
+    }
+});
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports) {
 
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var PromptAction = function () {
-    function PromptAction() {
-        _classCallCheck(this, PromptAction);
-
-        this.promptAction = null;
-    }
-
-    _createClass(PromptAction, [{
-        key: 'setPromptAction',
-        value: function setPromptAction(promptAction) {
-            this.promptAction = promptAction;
-            console.log(this.promptAction.getActionName() + ' is setting.');
-            this.promptAction.afterSetExec();
-        }
-    }, {
-        key: 'getInputValue',
-        value: function getInputValue() {
-            return this.promptAction.getInputValue();
-        }
-    }, {
-        key: 'isPossibleKeyInput',
-        value: function isPossibleKeyInput(e) {
-            return this.promptAction.isPossibleKeyInput(e);
-        }
-    }, {
-        key: 'exec',
-        value: function exec(e) {
-            return this.promptAction.exec(e);
-        }
-    }]);
-
-    return PromptAction;
-}();
 
 var KeyEvent = function () {
     function KeyEvent() {
@@ -151,6 +193,24 @@ var KeyEvent = function () {
     return KeyEvent;
 }();
 
+/* harmony default export */ __webpack_exports__["a"] = (KeyEvent);
+
+/***/ }),
+/* 19 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__KeyEvent__ = __webpack_require__(18);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
 var ListenSingleCharKeyEvent = function (_KeyEvent) {
     _inherits(ListenSingleCharKeyEvent, _KeyEvent);
 
@@ -164,12 +224,12 @@ var ListenSingleCharKeyEvent = function (_KeyEvent) {
     }
 
     _createClass(ListenSingleCharKeyEvent, [{
-        key: 'setInputValue',
+        key: "setInputValue",
         value: function setInputValue(keyName) {
             this.inputValue = keyName;
         }
     }, {
-        key: 'isPossibleKeyInput',
+        key: "isPossibleKeyInput",
         value: function isPossibleKeyInput(e) {
             if (e.keyCode > 64 && e.keyCode < 91) {
                 return true;
@@ -178,7 +238,7 @@ var ListenSingleCharKeyEvent = function (_KeyEvent) {
             }
         }
     }, {
-        key: 'exec',
+        key: "exec",
         value: function exec(e) {
             this.setInputValue(e.key);
             console.log(this.inputValue);
@@ -186,18 +246,36 @@ var ListenSingleCharKeyEvent = function (_KeyEvent) {
     }]);
 
     return ListenSingleCharKeyEvent;
-}(KeyEvent);
+}(__WEBPACK_IMPORTED_MODULE_0__KeyEvent__["a" /* default */]);
 
-var ListenMultiKeyEvent = function (_KeyEvent2) {
-    _inherits(ListenMultiKeyEvent, _KeyEvent2);
+/* harmony default export */ __webpack_exports__["a"] = (ListenSingleCharKeyEvent);
+
+/***/ }),
+/* 20 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__KeyEvent__ = __webpack_require__(18);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var ListenMultiKeyEvent = function (_KeyEvent) {
+    _inherits(ListenMultiKeyEvent, _KeyEvent);
 
     function ListenMultiKeyEvent() {
         _classCallCheck(this, ListenMultiKeyEvent);
 
-        var _this2 = _possibleConstructorReturn(this, (ListenMultiKeyEvent.__proto__ || Object.getPrototypeOf(ListenMultiKeyEvent)).call(this));
+        var _this = _possibleConstructorReturn(this, (ListenMultiKeyEvent.__proto__ || Object.getPrototypeOf(ListenMultiKeyEvent)).call(this));
 
-        _this2.name = 'ListenMultiKeyEvent';
-        return _this2;
+        _this.name = 'ListenMultiKeyEvent';
+        return _this;
     }
 
     _createClass(ListenMultiKeyEvent, [{
@@ -223,18 +301,81 @@ var ListenMultiKeyEvent = function (_KeyEvent2) {
     }]);
 
     return ListenMultiKeyEvent;
-}(KeyEvent);
+}(__WEBPACK_IMPORTED_MODULE_0__KeyEvent__["a" /* default */]);
 
-var EnterEvent = function (_KeyEvent3) {
-    _inherits(EnterEvent, _KeyEvent3);
+/* harmony default export */ __webpack_exports__["a"] = (ListenMultiKeyEvent);
+
+/***/ }),
+/* 21 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var PromptAction = function () {
+    function PromptAction() {
+        _classCallCheck(this, PromptAction);
+
+        this.promptAction = null;
+    }
+
+    _createClass(PromptAction, [{
+        key: "setPromptAction",
+        value: function setPromptAction(promptAction) {
+            this.promptAction = promptAction;
+            console.log(this.promptAction.getActionName() + " is setting.");
+            this.promptAction.afterSetExec();
+        }
+    }, {
+        key: "getInputValue",
+        value: function getInputValue() {
+            return this.promptAction.getInputValue();
+        }
+    }, {
+        key: "isPossibleKeyInput",
+        value: function isPossibleKeyInput(e) {
+            return this.promptAction.isPossibleKeyInput(e);
+        }
+    }, {
+        key: "exec",
+        value: function exec(e) {
+            return this.promptAction.exec(e);
+        }
+    }]);
+
+    return PromptAction;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (PromptAction);
+
+/***/ }),
+/* 22 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__KeyEvent__ = __webpack_require__(18);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var EnterEvent = function (_KeyEvent) {
+    _inherits(EnterEvent, _KeyEvent);
 
     function EnterEvent() {
         _classCallCheck(this, EnterEvent);
 
-        var _this3 = _possibleConstructorReturn(this, (EnterEvent.__proto__ || Object.getPrototypeOf(EnterEvent)).call(this));
+        var _this = _possibleConstructorReturn(this, (EnterEvent.__proto__ || Object.getPrototypeOf(EnterEvent)).call(this));
 
-        _this3.name = 'EnterAction';
-        return _this3;
+        _this.name = 'EnterAction';
+        return _this;
     }
 
     _createClass(EnterEvent, [{
@@ -260,18 +401,36 @@ var EnterEvent = function (_KeyEvent3) {
     }]);
 
     return EnterEvent;
-}(KeyEvent);
+}(__WEBPACK_IMPORTED_MODULE_0__KeyEvent__["a" /* default */]);
 
-var RAction = function (_KeyEvent4) {
-    _inherits(RAction, _KeyEvent4);
+/* harmony default export */ __webpack_exports__["a"] = (EnterEvent);
+
+/***/ }),
+/* 23 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__KeyEvents_KeyEvent__ = __webpack_require__(18);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var RAction = function (_KeyEvent) {
+    _inherits(RAction, _KeyEvent);
 
     function RAction() {
         _classCallCheck(this, RAction);
 
-        var _this4 = _possibleConstructorReturn(this, (RAction.__proto__ || Object.getPrototypeOf(RAction)).call(this));
+        var _this = _possibleConstructorReturn(this, (RAction.__proto__ || Object.getPrototypeOf(RAction)).call(this));
 
-        _this4.name = 'rAction';
-        return _this4;
+        _this.name = 'rAction';
+        return _this;
     }
 
     _createClass(RAction, [{
@@ -282,18 +441,36 @@ var RAction = function (_KeyEvent4) {
     }]);
 
     return RAction;
-}(KeyEvent);
+}(__WEBPACK_IMPORTED_MODULE_0__KeyEvents_KeyEvent__["a" /* default */]);
 
-var WAction = function (_KeyEvent5) {
-    _inherits(WAction, _KeyEvent5);
+/* harmony default export */ __webpack_exports__["a"] = (RAction);
+
+/***/ }),
+/* 24 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__KeyEvents_KeyEvent__ = __webpack_require__(18);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var WAction = function (_KeyEvent) {
+    _inherits(WAction, _KeyEvent);
 
     function WAction() {
         _classCallCheck(this, WAction);
 
-        var _this5 = _possibleConstructorReturn(this, (WAction.__proto__ || Object.getPrototypeOf(WAction)).call(this));
+        var _this = _possibleConstructorReturn(this, (WAction.__proto__ || Object.getPrototypeOf(WAction)).call(this));
 
-        _this5.name = 'wAction';
-        return _this5;
+        _this.name = 'wAction';
+        return _this;
     }
 
     _createClass(WAction, [{
@@ -321,18 +498,36 @@ var WAction = function (_KeyEvent5) {
     }]);
 
     return WAction;
-}(KeyEvent);
+}(__WEBPACK_IMPORTED_MODULE_0__KeyEvents_KeyEvent__["a" /* default */]);
 
-var FAction = function (_KeyEvent6) {
-    _inherits(FAction, _KeyEvent6);
+/* harmony default export */ __webpack_exports__["a"] = (WAction);
+
+/***/ }),
+/* 25 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__KeyEvents_KeyEvent__ = __webpack_require__(18);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var FAction = function (_KeyEvent) {
+    _inherits(FAction, _KeyEvent);
 
     function FAction() {
         _classCallCheck(this, FAction);
 
-        var _this6 = _possibleConstructorReturn(this, (FAction.__proto__ || Object.getPrototypeOf(FAction)).call(this));
+        var _this = _possibleConstructorReturn(this, (FAction.__proto__ || Object.getPrototypeOf(FAction)).call(this));
 
-        _this6.name = 'fAction';
-        return _this6;
+        _this.name = 'fAction';
+        return _this;
     }
 
     _createClass(FAction, [{
@@ -343,49 +538,9 @@ var FAction = function (_KeyEvent6) {
     }]);
 
     return FAction;
-}(KeyEvent);
+}(__WEBPACK_IMPORTED_MODULE_0__KeyEvents_KeyEvent__["a" /* default */]);
 
-var pAction = new PromptAction();
-var rAction = new RAction();
-var wAction = new WAction();
-var fAction = new FAction();
-
-var enterEvent = new EnterEvent();
-var listenSingleKeyEvent = new ListenSingleCharKeyEvent();
-var listenMultiKeyEvent = new ListenMultiKeyEvent();
-
-var actions = { enterEvent: enterEvent, rAction: rAction, wAction: wAction, fAction: fAction, listenSingleKeyEvent: listenSingleKeyEvent, listenMultiKeyEvent: listenMultiKeyEvent };
-var currentAction = 'listenSingleKeyEvent';
-pAction.setPromptAction(actions[currentAction]);
-
-var keyEvent = document.addEventListener('keyup', function (e) {
-    e.preventDefault();
-    var inputValueBox = document.querySelector('.inputValue');
-    if (e.code === "Enter") {
-        actions['enterEvent'].setInputValue(pAction.getInputValue());
-        pAction.setPromptAction(actions['enterEvent']);
-        var nextActionName = pAction.exec(e);
-        console.log('nextActionName', nextActionName);
-        if (nextActionName === null) {
-            pAction.setPromptAction(actions[currentAction]);
-            inputValueBox.innerHTML = '잘못된 입력입니다. 다시 시도하세요.';
-        } else {
-            pAction.setPromptAction(actions[nextActionName]);
-            currentAction = nextActionName;
-        }
-    } else {
-        if (pAction.isPossibleKeyInput(e)) {
-            pAction.exec(e);
-        }
-        inputValueBox.innerHTML = pAction.getInputValue();
-    }
-});
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
+/* harmony default export */ __webpack_exports__["a"] = (FAction);
 
 /***/ })
 /******/ ]);

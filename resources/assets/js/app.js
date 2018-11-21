@@ -1,150 +1,13 @@
-class PromptAction {
-    constructor() {
-        this.promptAction = null;
-    }
-    setPromptAction(promptAction) {
-        this.promptAction = promptAction;
-        console.log(`${this.promptAction.getActionName()} is setting.`);
-        this.promptAction.afterSetExec();
-    }
-    getInputValue() {
-        return this.promptAction.getInputValue();
-    }
-    isPossibleKeyInput(e) {
-        return this.promptAction.isPossibleKeyInput(e);
-    }
-    exec(e) {
-        return this.promptAction.exec(e);
-    }
-}
+import ListenSingleCharKeyEvent from "./KeyEvents/ListenSingleCharKeyEvent";
+import ListenMultiKeyEvent from "./KeyEvents/ListenMultiKeyEvent";
 
-class KeyEvent {
-    constructor() {
-        this.name = '';
-        this.inputValue = '';
-    }
-    getActionName() {
-        return this.name;
-    }
-    getInputValue() {
-        return this.inputValue;
-    }
-    isPossibleKeyInput(e) {
-        console.log(`${this.name} has not possibleKey condition.`);
-        return true;
-    }
-    afterSetExec() {
-        console.log('This is afterSetExec from KeyEvent');
-    }
-}
+import PromptAction from './KeyActions/PromptAction';
+import EnterEvent from "./KeyEvents/EnterEvent";
+import RAction from "./KeyActions/RAction";
+import WAction from "./KeyActions/WAction";
+import FAction from "./KeyActions/FAction";
 
-class ListenSingleCharKeyEvent extends KeyEvent {
-    constructor() {
-        super();
-        this.name = 'ListenSingleCharKeyEvent';
-    }
-    setInputValue(keyName) {
-        this.inputValue = keyName;
-    }
-    isPossibleKeyInput(e) {
-        if(e.keyCode > 64 && e.keyCode < 91) {
-            return true;
-        } else {
-            return false
-        }
-    }
-    exec(e) {
-        this.setInputValue(e.key);
-        console.log(this.inputValue);
-    }
-}
-
-class ListenMultiKeyEvent extends KeyEvent {
-    constructor() {
-        super();
-        this.name = 'ListenMultiKeyEvent';
-    }
-    setInputValue(keyName) {
-        this.inputValue += keyName;
-    }
-    backspaceInputValue() {
-        this.inputValue = this.inputValue.slice(0, this.inputValue.length-1);
-    }
-    exec(e) {
-        if (e.key === 'Backspace') {
-            this.backspaceInputValue();
-        } else {
-            this.setInputValue(e.key);
-        }
-        console.log(this.inputValue);
-    }
-}
-
-class EnterEvent extends KeyEvent {
-    constructor() {
-        super();
-        this.name = 'EnterAction';
-    }
-    setInputValue(val) {
-        this.inputValue = val;
-    }
-    exec() {
-        const tAction = `${this.getInputValue()}Action`;
-        if (actions.hasOwnProperty(tAction)) {
-            return tAction;
-        } else {
-            return null;
-        }
-    }
-    afterSetExec() {
-        console.log('This is afterSetExec from EnterEvent');
-    }
-}
-
-class RAction extends KeyEvent {
-    constructor() {
-        super();
-        this.name = 'rAction';
-    }
-    exec() {
-        console.log('R');
-    }
-}
-
-class WAction extends KeyEvent {
-    constructor() {
-        super();
-        this.name = 'wAction';
-    }
-    exec() {
-        console.log('W');
-    }
-    isPossibleKeyInput() {
-        console.log('test');
-    }
-    afterSetExec() {
-        console.log('afterSetExec from wAction');
-        const inputValueBox = document.querySelector('.inputValue');
-        inputValueBox.innerHTML = '';
-        const tempBrElem = document.createElement('br');
-        const tempSpanElem = document.createElement('span');
-        tempSpanElem.innerText = '» 글 제목:';
-        inputValueBox.append(tempBrElem);
-        inputValueBox.append(tempSpanElem);
-    }
-}
-
-class FAction extends KeyEvent {
-    constructor() {
-        super();
-        this.name = 'fAction';
-    }
-    exec() {
-        console.log('F');
-    }
-}
-
-const pAction = new PromptAction();
+const promptAction = new PromptAction();
 const rAction = new RAction();
 const wAction = new WAction();
 const fAction = new FAction();
@@ -155,27 +18,27 @@ const listenMultiKeyEvent = new ListenMultiKeyEvent();
 
 const actions = { enterEvent, rAction, wAction, fAction, listenSingleKeyEvent, listenMultiKeyEvent };
 let currentAction = 'listenSingleKeyEvent';
-pAction.setPromptAction(actions[currentAction]);
+promptAction.setPromptAction(actions[currentAction]);
 
 const keyEvent = document.addEventListener('keyup', (e) => {
     e.preventDefault();
     const inputValueBox = document.querySelector('.inputValue');
     if (e.code === "Enter") {
-        actions['enterEvent'].setInputValue(pAction.getInputValue());
-        pAction.setPromptAction(actions['enterEvent']);
-        const nextActionName = pAction.exec(e);
+        actions['enterEvent'].setInputValue(promptAction.getInputValue());
+        promptAction.setPromptAction(actions['enterEvent']);
+        const nextActionName = promptAction.exec(e);
         console.log('nextActionName', nextActionName);
         if (nextActionName === null) {
-            pAction.setPromptAction(actions[currentAction]);
+            promptAction.setPromptAction(actions[currentAction]);
             inputValueBox.innerHTML = '잘못된 입력입니다. 다시 시도하세요.';
         } else {
-            pAction.setPromptAction(actions[nextActionName]);
+            promptAction.setPromptAction(actions[nextActionName]);
             currentAction = nextActionName;
         }
     } else {
-        if (pAction.isPossibleKeyInput(e)) {
-            pAction.exec(e);
+        if (promptAction.isPossibleKeyInput(e)) {
+            promptAction.exec(e);
         }
-        inputValueBox.innerHTML = pAction.getInputValue();
+        inputValueBox.innerHTML = promptAction.getInputValue();
     }
 });
